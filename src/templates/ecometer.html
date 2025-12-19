@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOMITRA - EcoMeter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0fdf4; color: #166534; }
+        .container { max-width: 800px; margin: 2rem auto; padding: 2rem; background-color: #d1fae5; border-radius: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        h1, h2, h3 { color: #065f46; font-weight: 700; }
+        input[type="file"], input[type="text"] { padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #16a34a; }
+        button { padding: 0.5rem 1rem; border-radius: 0.5rem; background-color: #16a34a; color: white; font-weight: 600; cursor: pointer; transition: background-color 0.2s; }
+        button:hover { background-color: #15803d; }
+        .result-box { background-color: #ecfdf5; border-left: 4px solid #16a34a; padding: 1rem; border-radius: 0.5rem; margin-top: 1rem; }
+        .nav-link { color: #166534; font-weight: 600; padding: 0.5rem 1rem; border-radius: 0.5rem; transition: background-color 0.2s; }
+        .nav-link:hover { background-color: #bbf7d0; }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto mt-10 p-8 rounded-2xl shadow-lg bg-green-50">
+        <h1 class="text-3xl font-bold mb-6 text-center text-green-800">ECOMITRA 🌿</h1>
+        
+        <!-- Navigation -->
+        <nav class="flex justify-center space-x-4 mb-8">
+            <a href="{{ url_for('home') }}" class="nav-link">🏠 Home</a>
+            <a href="{{ url_for('ecometer_page') }}" class="nav-link">📊 EcoMeter</a>
+            <a href="{{ url_for('diy_assistant_page') }}" class="nav-link">🎨 DIY Assistant</a>
+        </nav>
+
+        <h2 class="text-2xl font-semibold mb-4 text-green-700">📊 EcoMeter</h2>
+        <p class="text-gray-600 mb-4">Upload a product image or enter the product name to check its carbon emissions.</p>
+
+        <!-- Form -->
+        <form method="post" enctype="multipart/form-data" action="{{ url_for('analyze_file') }}" class="flex flex-col space-y-4">
+            <!-- File upload -->
+            <input type="file" name="file" 
+                   class="text-green-800 file:mr-4 file:py-2 file:px-4 
+                          file:rounded-full file:border-0 file:text-sm 
+                          file:font-semibold file:bg-green-200 file:text-green-700 
+                          hover:file:bg-green-300">
+            
+            <!-- Manual product name -->
+            <input type="text" name="product_name" placeholder="Enter product name" 
+                   class="p-2 border border-green-400 rounded-md text-green-800 focus:outline-none focus:ring-2 focus:ring-green-300">
+            
+            <button type="submit" 
+                    class="w-full py-3 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition-colors">
+                Upload & Analyze
+            </button>
+        </form>
+
+        <!-- Results -->
+        {% if results %}
+            <hr class="my-6 border-t-2 border-green-300">
+            <h2 class="text-2xl font-semibold mb-4 text-green-700">🌍 Carbon Emission Results</h2>
+            {% for product in results %}
+                    <div class="result-box bg-green-100 border-green-500 mb-4">
+                        <h3 class="text-xl font-bold mb-2 text-green-800">Product: {{ product.name }}</h3>
+                        {% if product.carbon_emission is mapping %}
+                            <ul class="list-disc list-inside text-green-900 mb-2">
+                                <li><strong>Embodied Emissions:</strong> {{ product.carbon_emission.embodied_emissions }} kg CO₂e</li>
+                                <li><strong>Usage Emissions:</strong> {{ product.carbon_emission.usage_emissions }} kg CO₂e</li>
+                                <li><strong>Total Emissions:</strong> {{ product.carbon_emission.total_emissions }} kg CO₂e</li>
+                            </ul>
+                            <div class="bg-green-200 text-green-900 p-3 rounded-md">
+                                <strong>Summary:</strong> {{ product.carbon_emission.summary }}
+                            </div>
+                        {% else %}
+                            <p class="text-green-900 whitespace-pre-line">
+                                {{ product.carbon_emission }}
+                            </p>
+                        {% endif %}
+                    </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

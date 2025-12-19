@@ -1,0 +1,15 @@
+# sensitive
+.env
+
+# virtual environment
+venv/
+__pycache__/
+
+# macOS
+.DS_Store
+
+# Python cache
+*.pyc
+
+# VS Code
+.vscode/
