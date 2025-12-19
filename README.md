@@ -23,7 +23,8 @@ AI responses.
 ---
 
 ## 🎥 Project Demo
-📁 Demo video is available in the `demo` folder.
+
+▶️ [Click here to watch the demo video](https://raw.githubusercontent.com/tanishachoudhary19/ECO_MITRA/main/demo/eco_mitra_demo.mov)
 
 ▶️ Click here to watch:  
 `demo/eco_mitra_demo.mov`
