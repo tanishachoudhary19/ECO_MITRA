@@ -39,4 +39,5 @@ included in this repository.
 
 ## 👩‍💻 Author
 **Tanisha Choudhary**  
+**Smridhi**
 BE CSE (AI)
