@@ -24,10 +24,15 @@ AI responses.
 
 ## 🎥 Project Demo
 
-▶️ [Click here to watch the demo video](https://raw.githubusercontent.com/tanishachoudhary19/ECO_MITRA/main/demo/eco_mitra_demo.mov)
 
-▶️ Click here to watch:  
-`demo/eco_mitra_demo.mov`
+
+https://github.com/user-attachments/assets/42618e68-bea7-46fe-877e-de5b7e35186a
+
+
+
+
+
+
 
 ---
 
